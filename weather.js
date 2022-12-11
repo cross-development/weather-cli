@@ -1,23 +1,26 @@
 #!/usr/bin/env node
+import { saveCityController } from './controllers/city.controller.js';
+import { saveTokenController } from './controllers/token.controller.js';
+import { displayHelpController } from './controllers/help.controller.js';
+import { getWeatherController } from './controllers/weather.controller.js';
 import { getArgs } from './helpers/args.js';
-import { printHelp } from './services/log.service.js';
 
 const initCLI = () => {
   const args = getArgs(process.argv);
 
   if (args.h) {
-    printHelp();
+    return displayHelpController();
   }
 
   if (args.s) {
-    console.log('city');
+    return saveCityController(args.s);
   }
 
   if (args.t) {
-    console.log('token');
+    return saveTokenController(args.t);
   }
 
-  console.log('weather');
+  return getWeatherController();
 };
 
 initCLI();
